@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1" xmlns="http://www.w3.org/2001/vxml"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd">
+    <script>
+        var course = {
+            "introduction" : "Welcome to the Job Aid Course. This will help you in your duties.",
+            "menu" : "Please select a level",
+            "levels" :[
+                {
+                    "introduction" : "Level 1",
+                    "menu" : "Please select a chapter in level 1",
+                    "chapters" :[
+                        {
+                                "introduction" : "Level 1 Chapter 1",
+                                "menu" : "Please select a lesson in level 1  chapter 1",
+                                "lessons" : [
+                                    {"content" : "This is lesson 1 in chapter 1 level 1"},
+                                    {"content" : "This is lesson 2 in chapter 1 level 1"},
+                                    {"content" : "This is lesson 3 in chapter 1 level 1"},
+                                    {"content" : "This is lesson 4 in chapter 1 level 1"}
+                                ]
+                        },
+                        {
+                                "introduction" : "Level 1 Chapter 2",
+                                "menu" : "Please select a lesson in level 1  chapter 2",
+                                "lessons" : [
+                                    {"content" : "This is lesson 1 in chapter 2 level 1"},
+                                    {"content" : "This is lesson 2 in chapter 2 level 1"},
+                                    {"content" : "This is lesson 3 in chapter 2 level 1"},
+                                    {"content" : "This is lesson 4 in chapter 2 level 1"}
+                                ]
+                        },
+                        {
+                                "introduction" : "Level 1 Chapter 3",
+                                "menu" : "Please select a lesson in level 1  chapter 3",
+                                "lessons" : [
+                                    {"content" : "This is lesson 1 in chapter 3 level 1"},
+                                    {"content" : "This is lesson 2 in chapter 3 level 1"},
+                                    {"content" : "This is lesson 3 in chapter 3 level 1"},
+                                    {"content" : "This is lesson 4 in chapter 3 level 1"}
+                                ]
+                        },
+                    ]},
+                {
+                    "introduction" : "Level 2",
+                    "menu" : "Please select a chapter in level 2",
+                    "chapters" :[
+                        {
+                                "introduction" : "Level 2 Chapter 1",
+                                "menu" : "Please select a lesson in level 2  chapter 1",
+                                "lessons" : [
+                                    {"content" : "This is lesson 1 in chapter 1 level 2"},
+                                    {"content" : "This is lesson 2 in chapter 1 level 2"},
+                                    {"content" : "This is lesson 3 in chapter 1 level 2"},
+                                    {"content" : "This is lesson 4 in chapter 1 level 2"}
+                                ]
+                        },
+                        {
+                                "introduction" : "Level 2 Chapter 2",
+                                "menu" : "Please select a lesson in level 2 chapter 2",
+                                "lessons" : [
+                                    {"content" : "This is lesson 1 in chapter 2 level 2"},
+                                    {"content" : "This is lesson 2 in chapter 2 level 2"},
+                                    {"content" : "This is lesson 3 in chapter 2 level 2"},
+                                    {"content" : "This is lesson 4 in chapter 2 level 2"}
+                                ]
+                        },
+                        {
+                                "introduction" : "Level 2 Chapter 3",
+                                "menu" : "Please select a lesson in level 2  chapter 3",
+                                "lessons" : [
+                                    {"content" : "This is lesson 1 in chapter 3 level 2"},
+                                    {"content" : "This is lesson 2 in chapter 3 level 2"},
+                                    {"content" : "This is lesson 3 in chapter 3 level 2"},
+                                    {"content" : "This is lesson 4 in chapter 3 level 2"}
+                                ]
+                        },
+                    ]}
+            ]
+        };
+
+        var MAX_NO_INPUTS = 3;
+    </script>
+
+    <script>
+        var levelSelected = 0;
+        var time_out=10;
+        var next_item = "level_intro";
+        var levels = [0,1,2,3];
+
+        var PromptContext = function() {
+
+            this.incrementNoInputCount = function() {
+                this.noInputCount++;
+            }
+
+            this.incrementInvalidInputCount = function() {
+                this.invalidInputCount++;
+            }
+
+            this.hasExceededMaxNoInputs = function() {
+                return this.noInputCount > MAX_NO_INPUTS;
+            }
+
+            this.reset = function() {
+                this.noInputCount = 0;
+                this.invalidInputCount = 0;
+            }
+
+            this.reset();
+        };
+
+        var promptContext = new PromptContext();
+    </script>
+
+    <property name="timeout" value="3s"/>
+
+    <form id="job_aid">
+
+        <block name="welcome">
+            <value expr="course.introduction"/>.
+            Number of levels are <value expr="course.levels.length"/>.
+        </block>
+
+        <field name="level_selection">
+            <prompt>
+                <value expr="course.menu"/>.
+                Current no input count is: <value expr="promptContext.noInputCount"/>
+            </prompt>
+
+            <grammar mode="dtmf" version="1.0" root="root">
+                <rule id="root">
+                    <one-of>
+                        <item>0</item>
+                        <item>1</item>
+                        <item>2</item>
+                        <item>3</item>
+                        <item>4</item>
+                        <item>5</item>
+                        <item>6</item>
+                        <item>7</item>
+                        <item>8</item>
+                        <item>9</item>
+                        <item>*</item>
+                        <item>#</item>
+                    </one-of>
+                </rule>
+              </grammar>
+
+            <noinput>
+                <!--This has to be extracted out, since every field will be using this. Can we use "subdialogs" or are there any equivalents of methods?-->
+                <subdialog src="#noInputAction"/>
+                <reprompt/>
+            </noinput>
+
+            <filled>
+                <prompt>You entered <value expr="level_selection"/></prompt>
+                <goto expritem="next_item"/>
+            </filled>
+        </field>
+
+        <block name="level_intro">
+            This is an intro for level <value expr="level_selection"/>
+        </block>
+
+        <field name="chapter_selection">
+            <prompt>Select chapter within level <value expr="level_selection"/>.</prompt>
+                   <grammar mode="dtmf" version="1.0" root="root">
+                <rule id="root">
+             <one-of>
+               <item> 0 </item>
+               <item> 1 </item>
+               <item> 2 </item>
+               <item> 3 </item>
+               <item> 4 </item>
+               <item> 5 </item>
+               <item> 6 </item>
+               <item> 7 </item>
+               <item> 8 </item>
+               <item> 9 </item>
+             </one-of>
+            </rule>
+          </grammar>
+            <!--Validation-->
+            <filled>
+                <prompt>You entered <value expr="chapter_selection"/></prompt>
+                <prompt>You called from <value expr="session.callerid"/></prompt>
+            </filled>
+        </field>
+    </form>
+
+    <form id="noInputAction">
+        <script>
+            promptContext.incrementNoInputCount();
+        </script>
+        <if cond="promptContext.noInputCount &lt; 3">
+            <block>Did not hear from you for <value expr="promptContext.noInputCount"/> times.</block>
+        <else/>
+            <block>Continuing with disconnect since did not hear from you for too long.</block>
+            <disconnect/>
+        </if>
+        <return/>
+    </form>
+</vxml>
+
+
+
+
