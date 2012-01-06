@@ -165,40 +165,6 @@
                 <executions>
 
                     <execution>
-                        <id>install-jsapi-base</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <configuration>
-                            <file>${project.basedir}/lib/jsapi-1.0-base.jar</file>
-                            <groupId>jsapi</groupId>
-                            <artifactId>jsapi-1.0-base</artifactId>
-                            <version>1.0</version>
-                            <packaging>jar</packaging>
-                            <createChecksum>true</createChecksum>
-                            <generatePom>true</generatePom>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>install-jsapi</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <configuration>
-                            <file>${project.basedir}/lib/jsapi.jar</file>
-                            <groupId>jsapi</groupId>
-                            <artifactId>jsapi</artifactId>
-                            <version>1.0</version>
-                            <packaging>jar</packaging>
-                            <createChecksum>true</createChecksum>
-                            <generatePom>true</generatePom>
-                        </configuration>
-                    </execution>
-
-                    <execution>
                         <id>install-jvxml-client-text</id>
                         <phase>validate</phase>
                         <goals>
@@ -267,40 +233,6 @@
                     </execution>
 
                     <execution>
-                        <id>install-jvxml-jsapi10-impl</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <configuration>
-                            <file>${project.basedir}/lib/org.jvoicexml.implementation.jsapi10-impl.jar</file>
-                            <groupId>jvxml</groupId>
-                            <artifactId>jsapi10-impl</artifactId>
-                            <version>1.0</version>
-                            <packaging>jar</packaging>
-                            <createChecksum>true</createChecksum>
-                            <generatePom>true</generatePom>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>install-jvxml-jsapi10</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <configuration>
-                            <file>${project.basedir}/lib/org.jvoicexml.implementation.jsapi10.jar</file>
-                            <groupId>jvxml</groupId>
-                            <artifactId>jsapi10</artifactId>
-                            <version>1.0</version>
-                            <packaging>jar</packaging>
-                            <createChecksum>true</createChecksum>
-                            <generatePom>true</generatePom>
-                        </configuration>
-                    </execution>
-
-                    <execution>
                         <id>install-jvxml</id>
                         <phase>validate</phase>
                         <goals>
@@ -319,23 +251,6 @@
 
 
                     <execution>
-                        <id>install-jvxml-jndi</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <configuration>
-                            <file>${project.basedir}/lib/org.jvoicexml.jndi.jar</file>
-                            <groupId>jvxml</groupId>
-                            <artifactId>jvxml-jndi</artifactId>
-                            <version>1.0</version>
-                            <packaging>jar</packaging>
-                            <createChecksum>true</createChecksum>
-                            <generatePom>true</generatePom>
-                        </configuration>
-                    </execution>
-
-                    <execution>
                         <id>install-jvxml-srgs</id>
                         <phase>validate</phase>
                         <goals>
@@ -345,23 +260,6 @@
                             <file>${project.basedir}/lib/org.jvoicexml.processor.srgs.jar</file>
                             <groupId>jvxml</groupId>
                             <artifactId>jvxml-srgs</artifactId>
-                            <version>1.0</version>
-                            <packaging>jar</packaging>
-                            <createChecksum>true</createChecksum>
-                            <generatePom>true</generatePom>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>install-jvxml-wsj</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <configuration>
-                            <file>${project.basedir}/lib/WSJ_8gau_13dCep_16k_40mel_130Hz_6800Hz.jar</file>
-                            <groupId>jvxml</groupId>
-                            <artifactId>WSJ_8gau_13dCep_16k_40mel_130Hz_6800Hz</artifactId>
                             <version>1.0</version>
                             <packaging>jar</packaging>
                             <createChecksum>true</createChecksum>
@@ -387,23 +285,6 @@
                     </execution>
 
                     <execution>
-                        <id>install-jlibrtp</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <configuration>
-                            <file>${project.basedir}/lib/jlibrtp.jar</file>
-                            <groupId>jlibrtp</groupId>
-                            <artifactId>jlibrtp</artifactId>
-                            <version>1.0</version>
-                            <packaging>jar</packaging>
-                            <createChecksum>true</createChecksum>
-                            <generatePom>true</generatePom>
-                        </configuration>
-                    </execution>
-
-                    <execution>
                         <id>install-js</id>
                         <phase>validate</phase>
                         <goals>
@@ -413,23 +294,6 @@
                             <file>${project.basedir}/lib/js.jar</file>
                             <groupId>js</groupId>
                             <artifactId>js</artifactId>
-                            <version>1.0</version>
-                            <packaging>jar</packaging>
-                            <createChecksum>true</createChecksum>
-                            <generatePom>true</generatePom>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>install-sphinx</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <configuration>
-                            <file>${project.basedir}/lib/sphinx4.jar</file>
-                            <groupId>sphinx4</groupId>
-                            <artifactId>sphinx4</artifactId>
                             <version>1.0</version>
                             <packaging>jar</packaging>
                             <createChecksum>true</createChecksum>
