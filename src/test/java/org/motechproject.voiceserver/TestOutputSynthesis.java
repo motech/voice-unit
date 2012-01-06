@@ -1,11 +1,9 @@
 package org.motechproject.voiceserver;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
 
-@Ignore
 public class TestOutputSynthesis {
 
     public static final String COMMON_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><vxml version=\"2.1\" xmlns=\"http://www.w3.org/2001/vxml\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schematicLocation=\"http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml20/vxml.xsd\"><meta content=\"JVoiceXML group\" name=\"author\"></meta><meta content=\"2005-2010 JVoiceXML group - http://jvoicexml.sourceforge.net\" name=\"copyright\"></meta>";

@@ -32,16 +32,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.speechforge</groupId>
-            <artifactId>cairo-sip</artifactId>
-            <version>0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.speechforge</groupId>
-            <artifactId>cairo-client</artifactId>
-            <version>0.1</version>
-        </dependency>
-        <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
             <version>3.1</version>
@@ -57,24 +47,14 @@
             <version>1.4</version>
         </dependency>
         <dependency>
-            <groupId>commons-pool</groupId>
-            <artifactId>commons-pool</artifactId>
-            <version>20030825.183949</version>
+          <groupId>commons-pool</groupId>
+          <artifactId>commons-pool</artifactId>
+          <version>1.5.5</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.6.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.4</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -107,74 +87,14 @@
             <version>3.1.0.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>20041127.091804</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.speech</groupId>
-            <artifactId>freetts-cmu_us_kal</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.speech</groupId>
-            <artifactId>freetts-cmu_us_kal</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.speech</groupId>
-            <artifactId>freetts-cmulex</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.speech</groupId>
-            <artifactId>freetts-en_us</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.speech</groupId>
-            <artifactId>freetts-jsapi</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.speech</groupId>
-            <artifactId>freetts</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.0.1</version>
         </dependency>
 
         <dependency>
-            <groupId>jsapi</groupId>
-            <artifactId>jsapi-1.0-base</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>jsapi</groupId>
-            <artifactId>jsapi</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>jvxml</groupId>
-            <artifactId>jvxml-client-text</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
             <groupId>jvxml</groupId>
             <artifactId>jvxml-client</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>jvxml</groupId>
-            <artifactId>jvxml-text</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>jvxml</groupId>
-            <artifactId>jvxml-xml</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
@@ -184,27 +104,22 @@
         </dependency>
         <dependency>
             <groupId>jvxml</groupId>
-            <artifactId>jsapi10-impl</artifactId>
+            <artifactId>jvxml-text</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>jvxml</groupId>
-            <artifactId>jsapi10</artifactId>
+            <artifactId>jvxml-client-text</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>jvxml</groupId>
-            <artifactId>jvxml-jndi</artifactId>
+            <artifactId>jvxml-xml</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>jvxml</groupId>
             <artifactId>jvxml-srgs</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>jvxml</groupId>
-            <artifactId>WSJ_8gau_13dCep_16k_40mel_130Hz_6800Hz</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
@@ -215,16 +130,6 @@
         <dependency>
             <groupId>js</groupId>
             <artifactId>js</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>jlibrtp</groupId>
-            <artifactId>jlibrtp</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>sphinx4</groupId>
-            <artifactId>sphinx4</artifactId>
             <version>1.0</version>
         </dependency>
 
@@ -548,7 +453,6 @@
                             <generatePom>true</generatePom>
                         </configuration>
                     </execution>
-
 
                 </executions>
             </plugin>
