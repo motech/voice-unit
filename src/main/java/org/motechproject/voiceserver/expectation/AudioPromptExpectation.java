@@ -4,11 +4,13 @@ import org.motechproject.voiceserver.CallController;
 
 import java.text.MessageFormat;
 
-public class AudioExpectation implements Expectation {
+public class AudioPromptExpectation implements Expectation {
     private String expectedAudioFilePath;
+    private char responseToSend;
 
-    public AudioExpectation(String expectedAudioFilePath) {
+    public AudioPromptExpectation(String expectedAudioFilePath, char responseToSend) {
         this.expectedAudioFilePath = expectedAudioFilePath;
+        this.responseToSend = responseToSend;
     }
 
     @Override
@@ -17,10 +19,11 @@ public class AudioExpectation implements Expectation {
         if (exception != null) {
             callController.expectationWasNotMatched(exception);
         }
+        callController.sendDTMF(responseToSend);
     }
 
     @Override
     public String description() {
-        return MessageFormat.format("Listens to a file by name: ''{0}''.", expectedAudioFilePath);
+        return MessageFormat.format("Listens to ''{0}'', respond with ''{1}''.", expectedAudioFilePath, responseToSend);
     }
 }

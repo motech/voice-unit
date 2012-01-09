@@ -21,6 +21,7 @@ public class Caller {
     }
 
     public void hangup() {
+        expectations.add(new HangupExpectation());
     }
 
     public Expectation nextExpectation() {
@@ -30,11 +31,19 @@ public class Caller {
         return new UnexpectedExpectation();
     }
 
+    public void listensTo(String audioFilePath) {
+        expectations.add(new AudioExpectation(audioFilePath));
+    }
+
+    public void respondToAudio(String expectedAudioFilePath, char responseToSend) {
+        expectations.add(new AudioPromptExpectation(expectedAudioFilePath, responseToSend));
+    }
+
     public boolean hasMoreExpectations() {
         return !expectations.isEmpty();
     }
 
-    public void listensTo(String audioFilePath) {
-        expectations.add(new AudioExpectation(audioFilePath));
+    public boolean nextActionIsToHangup() {
+        return expectations.peek() instanceof HangupExpectation;
     }
 }

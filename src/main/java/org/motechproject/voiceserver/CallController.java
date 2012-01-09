@@ -14,6 +14,7 @@ public class CallController {
     private TextServer textServer;
     private Session session;
     private volatile ExpectationException exception;
+    private boolean hasHungUp = false;
 
     public CallController(Caller caller) {
         this.caller = caller;
@@ -60,13 +61,9 @@ public class CallController {
     }
 
     public void wasExpecting(Object actualContent) {
-        if (exception == null) {
-            try {
-                caller.nextExpectation().actOn(actualContent, this);
-            } catch (Exception e) {
-                expectationWasNotMatched(new ExpectationException("Failed in expectation: " + e.toString()));
-            }
-        }
+        checkForCallerHangup();
+        handleEvent(actualContent);
+        checkForCallerHangup();
     }
 
     public void expectationWasNotMatched(ExpectationException exceptionWhichNeedsToBeThrown) {
@@ -91,5 +88,22 @@ public class CallController {
     private void stopServers() {
         textServer.stopServer();
         voiceServer.shutdown();
+    }
+
+    private void checkForCallerHangup() {
+        if (!hasHungUp && caller.nextActionIsToHangup()) {
+            caller.nextExpectation();
+            hasHungUp = true;
+        }
+    }
+
+    private void handleEvent(Object actualContent) {
+        if (exception == null && !hasHungUp) {
+            try {
+                caller.nextExpectation().actOn(actualContent, this);
+            } catch (Exception e) {
+                expectationWasNotMatched(new ExpectationException("Failed in expectation: " + e.toString()));
+            }
+        }
     }
 }
