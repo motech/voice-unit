@@ -1,11 +1,16 @@
 About:
 =====
 
-This is a unit-testing framework for VoiceXML, using JVoiceXML. As of now, some of the features are:
+This is a unit-testing framework for [VoiceXML](http://www.w3.org/TR/voicexml20/), using [JVoiceXML](http://jvoicexml.sourceforge.net/). As of now, some of the features are:
 
 * Ability to assert on TTS (Text-To-Speech) output.
 * Ability to assert on Audio output.
 * Ability to enter DTMF input in response to TTS and Audio prompts.
+
+Examples:
+=========
+
+Take a look at [TestIVR.java](https://github.com/motech/voice-unit/blob/master/src/test/java/org/motechproject/voiceserver/TestIVR.java).
 
 Opening the project in IntelliJ Idea
 ====================================
