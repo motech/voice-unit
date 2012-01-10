@@ -1,12 +1,12 @@
 package org.motechproject.voiceserver;
 
-import org.apache.commons.io.FileUtils;
 import org.jvoicexml.Session;
 import org.jvoicexml.client.text.TextServer;
 import org.motechproject.voiceserver.expectation.ExpectationException;
 
-import java.io.File;
+import java.net.URI;
 import java.text.MessageFormat;
+import java.util.regex.Pattern;
 
 public class CallController {
     private Caller caller;
@@ -30,24 +30,19 @@ public class CallController {
         return this;
     }
 
-    public void startCallFor(String voiceXml) {
-        File voiceFile = null;
+    public void startCallFor(URI uriOfVoiceXML) {
         try {
-            voiceFile = File.createTempFile("voice", "xml");
-            FileUtils.writeStringToFile(voiceFile, voiceXml);
+            URI baseURI = new URI(Pattern.compile("/[^/]*$").matcher(uriOfVoiceXML.toASCIIString()).replaceAll("/"));
+            voiceServer.setBaseURIInDocumentServer(baseURI);
 
             session = voiceServer.createSession(textServer.getConnectionInformation());
-            session.call(voiceFile.toURI());
+            session.call(uriOfVoiceXML);
 
             session.waitSessionEnd();
             hangUp();
         } catch (Throwable e) {
             throw new RuntimeException(e);
         } finally {
-            if (voiceFile != null) {
-                voiceFile.deleteOnExit();
-                FileUtils.deleteQuietly(voiceFile);
-            }
             stopServers();
         }
     }

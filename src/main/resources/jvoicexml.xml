@@ -27,35 +27,7 @@
     Document server with the configuration of all known strategies
     to handle URIs.
   -->
-  <bean id="org.jvoicexml.DocumentServer" class="org.jvoicexml.documentserver.JVoiceXmlDocumentServer">
-    <property name="schemeStrategies">
-      <list>
-        <bean
-          class="org.jvoicexml.documentserver.schemestrategy.MappedDocumentStrategy" />
-        <bean
-          class="org.jvoicexml.documentserver.schemestrategy.FileSchemeStrategy" />
-        <bean
-          class="org.jvoicexml.documentserver.schemestrategy.HttpSchemeStrategy">
-          <!-- Strategy default fetch timeout in msec -->
-          <property name="fetchTimeout" value="5000"/>
-        </bean>
-        <bean
-          class="org.jvoicexml.documentserver.schemestrategy.HttpSchemeStrategy">
-          <!-- Strategy default fetch timeout in msec -->
-          <property name="fetchTimeout" value="5000"/>
-          <property name="scheme" value="https" />
-        </bean>
-        <bean
-          class="org.jvoicexml.documentserver.schemestrategy.builtin.BuiltinSchemeStrategy" />
-      </list>
-    </property>
-    <property name="fetchAttributes">
-        <bean class="org.jvoicexml.FetchAttributes">
-          <!-- Default fetch timeout in msec -->
-          <property name="fetchTimeout" value="5000"/>
-        </bean>
-    </property>
-  </bean>
+  <bean id="org.jvoicexml.DocumentServer" class="org.motechproject.voiceserver.DocumentServerWhichCanResolveRelativeURLs"/>
 
   <!--
     - Grammar processor with all grammar identifiers and transformers from 

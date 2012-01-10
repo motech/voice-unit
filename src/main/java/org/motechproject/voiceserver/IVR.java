@@ -1,26 +1,21 @@
 package org.motechproject.voiceserver;
 
-import org.apache.commons.io.FileUtils;
 import org.jvoicexml.client.text.TextServer;
 
 import java.io.File;
-import java.io.IOException;
+import java.net.URI;
 
 public class IVR {
-    private String voiceXml;
+    private URI uriOfVoiceXML;
     final Object lock = new Object();
     private volatile Throwable exception;
 
-    public IVR(String voiceXml) {
-        this.voiceXml = voiceXml;
+    public IVR(File fileContainingVoiceXml) {
+        this.uriOfVoiceXML = fileContainingVoiceXml.toURI();
     }
 
-    public IVR(File fileContainingVoiceXml) {
-        try {
-            this.voiceXml = FileUtils.readFileToString(fileContainingVoiceXml);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public IVR(URI url) {
+        this.uriOfVoiceXML = url;
     }
 
     public void getsCallFrom(Caller caller) {
@@ -31,7 +26,7 @@ public class IVR {
         VoiceServer voiceServer = new VoiceServer().start();
         TextServer textServer = startTextServer(listener);
 
-        callController.withServer(voiceServer).withTextServer(textServer).startCallFor(voiceXml);
+        callController.withServer(voiceServer).withTextServer(textServer).startCallFor(uriOfVoiceXML);
         failIfErrorsHaveBeenThrown(callController);
     }
 

@@ -3,11 +3,13 @@ package org.motechproject.voiceserver;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.jvoicexml.ConnectionInformation;
+import org.jvoicexml.DocumentServer;
 import org.jvoicexml.JVoiceXmlMain;
 import org.jvoicexml.Session;
 import org.jvoicexml.event.ErrorEvent;
 
 import java.io.File;
+import java.net.URI;
 
 public class VoiceServer {
     private ServerLogAppender appender;
@@ -53,5 +55,10 @@ public class VoiceServer {
                 thread.interrupt();
             }
         }
+    }
+
+    public void setBaseURIInDocumentServer(URI uri) {
+        DocumentServerWhichCanResolveRelativeURLs documentServer = (DocumentServerWhichCanResolveRelativeURLs) jVoiceXml.getConfiguration().loadObject(DocumentServer.class);
+        documentServer.setBaseURI(uri);
     }
 }

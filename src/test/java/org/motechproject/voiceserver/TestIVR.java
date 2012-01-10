@@ -1,13 +1,18 @@
 package org.motechproject.voiceserver;
 
+import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 
 public class TestIVR {
 
     public static final String COMMON_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><vxml version=\"2.1\" xmlns=\"http://www.w3.org/2001/vxml\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schematicLocation=\"http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml20/vxml.xsd\"><meta content=\"JVoiceXML group\" name=\"author\"></meta><meta content=\"2005-2010 JVoiceXML group - http://jvoicexml.sourceforge.net\" name=\"copyright\"></meta>";
     public static final String COMMON_FOOTER = "</vxml>";
+    private File fileContainingVoiceXml;
+    private File voiceFile;
 
     @Test
     public void shouldRecognizeTextToSpeech() {
@@ -16,7 +21,7 @@ public class TestIVR {
         Caller caller = new Caller();
         caller.hears("Hello World!");
 
-        new IVR(xmlInput).getsCallFrom(caller);
+        new IVR(fileFor(xmlInput)).getsCallFrom(caller);
     }
 
     @Test
@@ -39,13 +44,22 @@ public class TestIVR {
     }
 
     @Test
+    public void shouldResolveDynamicScriptWithRelativePath() throws Exception {
+        Caller caller = new Caller();
+        caller.hears("Life is 42");
+
+        File voiceXmlFile = new File(getClass().getResource("/vxml_with_dynamic_script.xml").getPath());
+        new IVR(voiceXmlFile).getsCallFrom(caller);
+    }
+
+    @Test
     public void shouldFindAudioByPartialPath() throws Exception {
         String xmlInput = vxmlWithAudioTag();
 
         Caller caller = new Caller();
         caller.listensTo("Hello.wav");
 
-        new IVR(xmlInput).getsCallFrom(caller);
+        new IVR(fileFor(xmlInput)).getsCallFrom(caller);
     }
 
     @Test
@@ -55,7 +69,7 @@ public class TestIVR {
         Caller caller = new Caller();
         caller.listensTo("http://audio.example.com/Hello.wav");
 
-        new IVR(xmlInput).getsCallFrom(caller);
+        new IVR(fileFor(xmlInput)).getsCallFrom(caller);
     }
 
     @Test
@@ -67,7 +81,7 @@ public class TestIVR {
         caller.hears("You entered:");
         caller.hears("1");
 
-        new IVR(xmlInput).getsCallFrom(caller);
+        new IVR(fileFor(xmlInput)).getsCallFrom(caller);
     }
 
     @Test
@@ -79,7 +93,7 @@ public class TestIVR {
         caller.hears("You entered:");
         caller.hears("1");
 
-        new IVR(xmlInput).getsCallFrom(caller);
+        new IVR(fileFor(xmlInput)).getsCallFrom(caller);
     }
 
     /* Cannot hangup when there is a prompt, which expects input, is coming up next. */
@@ -91,9 +105,17 @@ public class TestIVR {
         caller.respondToAudio("http://audio.example.com/PromptForInput.wav", '1');
         caller.hangup();
 
-        new IVR(xmlInput).getsCallFrom(caller);
+        new IVR(fileFor(xmlInput)).getsCallFrom(caller);
     }
 
+    @After
+    public void tearDown() {
+        if (voiceFile != null) {
+            voiceFile.deleteOnExit();
+            FileUtils.deleteQuietly(voiceFile);
+        }
+
+    }
     private String vxmlWithAudioTag() {
         return COMMON_HEADER +
                     "<script>var GREETING = \"http://audio.example.com/Hello.wav\";</script>" +
@@ -135,5 +157,15 @@ public class TestIVR {
                 "  </field>" +
                 "  <block name=\"confirmation\">You entered: <value expr=\"responseToPrompt\"/></block>" +
                 "</form>" + COMMON_FOOTER;
+    }
+
+    private File fileFor(String xmlInput) {
+        try {
+            voiceFile = File.createTempFile("voice", "xml");
+            FileUtils.writeStringToFile(voiceFile, xmlInput);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return voiceFile;
     }
 }
