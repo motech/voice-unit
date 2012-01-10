@@ -1,5 +1,6 @@
 package org.motechproject.voiceserver;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.jvoicexml.ConnectionInformation;
 import org.jvoicexml.JVoiceXmlMain;
@@ -13,9 +14,10 @@ public class VoiceServer {
     private final JVoiceXmlMain jVoiceXml;
 
     public VoiceServer() {
-        final Logger rootLogger = Logger.getRootLogger();
+        Logger logger = Logger.getLogger("org.jvoicexml");
+        logger.setLevel(Level.DEBUG);
         appender = new ServerLogAppender();
-        rootLogger.addAppender(appender);
+        logger.addAppender(appender);
 
         String pathToConfigDir = new File(getClass().getResource("/jvoicexml.xml").getFile()).getParent();
         System.setProperty("jvoicexml.config", pathToConfigDir);
