@@ -1,8 +1,9 @@
 package org.voiceunit.server;
 
 import org.apache.log4j.Logger;
-import org.jvoicexml.Session;
+import org.jvoicexml.client.text.TextConnectionInformation;
 import org.jvoicexml.client.text.TextServer;
+import org.jvoicexml.interpreter.JVoiceXmlSession;
 import org.voiceunit.server.expectation.Expectation;
 import org.voiceunit.server.expectation.ExpectationException;
 
@@ -14,7 +15,7 @@ public class CallController {
     private Caller caller;
     private VoiceServer voiceServer;
     private TextServer textServer;
-    private Session session;
+    private JVoiceXmlSession session;
     private volatile ExpectationException exception;
     private boolean hasHungUp = false;
 
@@ -34,12 +35,15 @@ public class CallController {
         return this;
     }
 
-    public void startCallFor(URI uriOfVoiceXML) {
+    public void startCallFor(String phoneNumberAtWhichIVRIsSetup, URI uriOfVoiceXML) {
         try {
             URI baseURI = new URI(Pattern.compile("/[^/]*$").matcher(uriOfVoiceXML.toASCIIString()).replaceAll("/"));
             voiceServer.setBaseURIInDocumentServer(baseURI);
 
-            session = voiceServer.createSession(textServer.getConnectionInformation());
+            TextConnectionInformation connectionInformation = (TextConnectionInformation) textServer.getConnectionInformation();
+            connectionInformation.setCalledDevice(new URI(phoneNumberAtWhichIVRIsSetup));
+
+            session = (JVoiceXmlSession) voiceServer.createSession(connectionInformation);
             session.call(uriOfVoiceXML);
 
             session.waitSessionEnd();

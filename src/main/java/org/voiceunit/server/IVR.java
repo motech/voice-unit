@@ -15,6 +15,7 @@ public class IVR {
     private URI uriOfVoiceXML;
     final Object lock = new Object();
     private volatile Throwable exception;
+    private String phoneNumberAtWhichIVRIsSetup = "";
 
     public IVR(File fileContainingVoiceXml) {
         this.uriOfVoiceXML = fileContainingVoiceXml.toURI();
@@ -32,7 +33,7 @@ public class IVR {
         VoiceServer voiceServer = new VoiceServer().start();
         TextServer textServer = startTextServer(listener);
 
-        callController.withServer(voiceServer).withTextServer(textServer).startCallFor(uriOfVoiceXML);
+        callController.withServer(voiceServer).withTextServer(textServer).startCallFor(phoneNumberAtWhichIVRIsSetup, uriOfVoiceXML);
         failIfErrorsHaveBeenThrown(callController);
     }
 
@@ -78,6 +79,11 @@ public class IVR {
         consoleAppender.addFilter(levelRangeFilter);
         Logger.getRootLogger().addAppender(consoleAppender);
 
+        return this;
+    }
+
+    public IVR at(String phoneNumberAtWhichIVRIsSetup) {
+        this.phoneNumberAtWhichIVRIsSetup = phoneNumberAtWhichIVRIsSetup;
         return this;
     }
 }

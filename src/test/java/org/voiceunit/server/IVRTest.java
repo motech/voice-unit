@@ -15,12 +15,12 @@ public class IVRTest {
 
     @Test
     public void shouldRecognizeTextToSpeech() {
-        String xmlInput = COMMON_HEADER + "<form id=\"say_hello\"><block>Hello World!</block></form>" + COMMON_FOOTER;
+        String xmlInput = COMMON_HEADER + "<form id=\"say_hello\"><block><value expr=\"'Call from ' + session.connection.local.uri\"/></block></form>" + COMMON_FOOTER;
 
         Caller caller = new Caller();
-        caller.hears("Hello World!");
+        caller.hears("Call from 5771101");
 
-        new IVR(fileFor(xmlInput)).getsCallFrom(caller);
+        new IVR(fileFor(xmlInput)).at("5771101").getsCallFrom(caller);
     }
 
     @Test
