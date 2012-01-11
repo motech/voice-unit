@@ -325,7 +325,6 @@
               <artifactId>maven-shade-plugin</artifactId>
               <version>1.5</version>
               <configuration>
-                <!-- put your configurations here -->
               </configuration>
               <executions>
                 <execution>

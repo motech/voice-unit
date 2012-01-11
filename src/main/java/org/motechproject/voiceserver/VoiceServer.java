@@ -32,6 +32,7 @@ public class VoiceServer {
     }
 
     public VoiceServer start() {
+        System.setProperty("javax.xml.transform.TransformerFactory", "com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl");
         jVoiceXml.start();
         appender.waitTillServerHasStarted();
         return this;
