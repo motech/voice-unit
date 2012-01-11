@@ -1,7 +1,9 @@
 package org.voiceunit.server;
 
+import org.apache.log4j.Logger;
 import org.jvoicexml.Session;
 import org.jvoicexml.client.text.TextServer;
+import org.voiceunit.server.expectation.Expectation;
 import org.voiceunit.server.expectation.ExpectationException;
 
 import java.net.URI;
@@ -15,6 +17,8 @@ public class CallController {
     private Session session;
     private volatile ExpectationException exception;
     private boolean hasHungUp = false;
+
+    private Logger LOGGER = Logger.getLogger(this.getClass());
 
     public CallController(Caller caller) {
         this.caller = caller;
@@ -88,6 +92,7 @@ public class CallController {
     private void checkForCallerHangup() {
         if (!hasHungUp && caller.nextActionIsToHangup()) {
             caller.nextExpectation();
+            LOGGER.info("Caller has hung up.");
             hasHungUp = true;
         }
     }
@@ -95,7 +100,10 @@ public class CallController {
     private void handleEvent(Object actualContent) {
         if (exception == null && !hasHungUp) {
             try {
-                caller.nextExpectation().actOn(actualContent, this);
+                Expectation expectation = caller.nextExpectation();
+                LOGGER.debug("Checking expectation: " + expectation.description() + " against " + actualContent);
+                expectation.actOn(actualContent, this);
+                LOGGER.debug("Expectation matched.");
             } catch (Exception e) {
                 expectationWasNotMatched(new ExpectationException("Failed in expectation: " + e.toString()));
             }

@@ -1,8 +1,14 @@
 package org.voiceunit.server;
 
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.apache.log4j.varia.LevelRangeFilter;
 import org.jvoicexml.client.text.TextServer;
 
 import java.io.File;
+import java.io.OutputStreamWriter;
 import java.net.URI;
 
 public class IVR {
@@ -60,5 +66,18 @@ public class IVR {
                 exception = throwable;
             }
         });
+    }
+
+    public IVR verbose() {
+        ConsoleAppender consoleAppender = new ConsoleAppender();
+        consoleAppender.setWriter(new OutputStreamWriter(System.out));
+        consoleAppender.setLayout(new PatternLayout("%6r [%-20.20t] %-5p %30.30c (%6L) %x %m%n"));
+        LevelRangeFilter levelRangeFilter = new LevelRangeFilter();
+        levelRangeFilter.setLevelMin(Level.DEBUG);
+
+        consoleAppender.addFilter(levelRangeFilter);
+        Logger.getRootLogger().addAppender(consoleAppender);
+
+        return this;
     }
 }
