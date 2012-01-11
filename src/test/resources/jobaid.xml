@@ -118,16 +118,8 @@
 
     <form id="job_aid">
 
-        <block name="welcome">
-            <value expr="course.introduction"/>.
-            Number of levels are <value expr="course.levels.length"/>.
-        </block>
-
         <field name="level_selection">
-            <prompt>
-                <value expr="course.menu"/>.
-                Current no input count is: <value expr="promptContext.noInputCount"/>
-            </prompt>
+            <prompt>Please enter something.</prompt>
 
             <grammar mode="dtmf" version="1.0" root="root">
                 <rule id="root">
@@ -149,57 +141,18 @@
               </grammar>
 
             <noinput>
-                <!--This has to be extracted out, since every field will be using this. Can we use "subdialogs" or are there any equivalents of methods?-->
                 <subdialog src="#noInputAction"/>
                 <reprompt/>
             </noinput>
 
             <filled>
-                <prompt>You entered <value expr="level_selection"/></prompt>
-                <goto expritem="next_item"/>
-            </filled>
-        </field>
-
-        <block name="level_intro">
-            This is an intro for level <value expr="level_selection"/>
-        </block>
-
-        <field name="chapter_selection">
-            <prompt>Select chapter within level <value expr="level_selection"/>.</prompt>
-                   <grammar mode="dtmf" version="1.0" root="root">
-                <rule id="root">
-             <one-of>
-               <item> 0 </item>
-               <item> 1 </item>
-               <item> 2 </item>
-               <item> 3 </item>
-               <item> 4 </item>
-               <item> 5 </item>
-               <item> 6 </item>
-               <item> 7 </item>
-               <item> 8 </item>
-               <item> 9 </item>
-             </one-of>
-            </rule>
-          </grammar>
-            <!--Validation-->
-            <filled>
-                <prompt>You entered <value expr="chapter_selection"/></prompt>
-                <prompt>You called from <value expr="session.callerid"/></prompt>
+                <prompt><value expr="'You entered ' + level_selection"/></prompt>
             </filled>
         </field>
     </form>
 
     <form id="noInputAction">
-        <script>
-            promptContext.incrementNoInputCount();
-        </script>
-        <if cond="promptContext.noInputCount &lt; 3">
-            <block>Did not hear from you for <value expr="promptContext.noInputCount"/> times.</block>
-        <else/>
-            <block>Continuing with disconnect since did not hear from you for too long.</block>
-            <disconnect/>
-        </if>
+        <block>Did not hear from you.</block>
         <return/>
     </form>
 </vxml>
