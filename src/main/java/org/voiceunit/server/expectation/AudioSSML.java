@@ -1,4 +1,4 @@
-package org.motechproject.voiceserver.expectation;
+package org.voiceunit.server.expectation;
 
 import org.apache.commons.io.IOUtils;
 import org.w3c.dom.Document;

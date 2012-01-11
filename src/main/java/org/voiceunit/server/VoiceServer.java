@@ -1,4 +1,4 @@
-package org.motechproject.voiceserver;
+package org.voiceunit.server;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -7,7 +7,7 @@ import org.jvoicexml.DocumentServer;
 import org.jvoicexml.JVoiceXmlMain;
 import org.jvoicexml.Session;
 import org.jvoicexml.event.ErrorEvent;
-import org.motechproject.voiceserver.utility.FileUtils;
+import org.voiceunit.server.utility.FileUtils;
 
 import java.io.File;
 import java.net.URI;

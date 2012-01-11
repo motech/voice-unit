@@ -1,4 +1,4 @@
-package org.motechproject.voiceserver;
+package org.voiceunit.server;
 
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.spi.LoggingEvent;

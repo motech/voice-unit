@@ -27,7 +27,7 @@
     Document server with the configuration of all known strategies
     to handle URIs.
   -->
-  <bean id="org.jvoicexml.DocumentServer" class="org.motechproject.voiceserver.DocumentServerWhichCanResolveRelativeURLs"/>
+  <bean id="org.jvoicexml.DocumentServer" class="org.voiceunit.server.DocumentServerWhichCanResolveRelativeURLs"/>
 
   <!--
     - Grammar processor with all grammar identifiers and transformers from 

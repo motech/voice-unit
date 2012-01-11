@@ -1,6 +1,6 @@
-package org.motechproject.voiceserver.expectation;
+package org.voiceunit.server.expectation;
 
-import org.motechproject.voiceserver.CallController;
+import org.voiceunit.server.CallController;
 
 public class HangupExpectation implements Expectation {
     @Override

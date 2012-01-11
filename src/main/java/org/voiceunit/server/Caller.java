@@ -1,6 +1,6 @@
-package org.motechproject.voiceserver;
+package org.voiceunit.server;
 
-import org.motechproject.voiceserver.expectation.*;
+import org.voiceunit.server.expectation.*;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;

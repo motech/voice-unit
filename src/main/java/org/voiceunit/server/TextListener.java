@@ -1,4 +1,4 @@
-package org.motechproject.voiceserver;
+package org.voiceunit.server;
 
 import org.jvoicexml.xml.ssml.SsmlDocument;
 

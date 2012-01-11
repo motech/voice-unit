@@ -1,8 +1,8 @@
-package org.motechproject.voiceserver;
+package org.voiceunit.server;
 
 import org.jvoicexml.Session;
 import org.jvoicexml.client.text.TextServer;
-import org.motechproject.voiceserver.expectation.ExpectationException;
+import org.voiceunit.server.expectation.ExpectationException;
 
 import java.net.URI;
 import java.text.MessageFormat;
