@@ -127,15 +127,10 @@
             <artifactId>chardet</artifactId>
             <version>1.0</version>
         </dependency>
+
         <dependency>
             <groupId>js</groupId>
             <artifactId>js</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>jmf</groupId>
-            <artifactId>jmf</artifactId>
             <version>1.0</version>
         </dependency>
 
@@ -300,24 +295,6 @@
                             <generatePom>true</generatePom>
                         </configuration>
                     </execution>
-
-                    <execution>
-                        <id>install-jmf</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <configuration>
-                            <file>${project.basedir}/lib/jmf.jar</file>
-                            <groupId>jmf</groupId>
-                            <artifactId>jmf</artifactId>
-                            <version>1.0</version>
-                            <packaging>jar</packaging>
-                            <createChecksum>true</createChecksum>
-                            <generatePom>true</generatePom>
-                        </configuration>
-                    </execution>
-
                 </executions>
             </plugin>
             <plugin>
@@ -329,7 +306,6 @@
                   <includes>
                     <include>jvxml:*</include>
                     <include>js:*</include>
-                    <include>jmf:*</include>
                     <include>chardet:*</include>
                   </includes>
                 </artifactSet>
